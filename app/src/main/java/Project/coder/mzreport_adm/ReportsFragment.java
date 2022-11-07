@@ -95,7 +95,7 @@ public class ReportsFragment extends Fragment {
         super.onStop();
         mAdapter.stopListening();
     }
-    public class WrapContentLinearLayoutManager extends LinearLayoutManager {
+    public static class WrapContentLinearLayoutManager extends LinearLayoutManager {
         public WrapContentLinearLayoutManager(Context context) {
             super(context);
         }

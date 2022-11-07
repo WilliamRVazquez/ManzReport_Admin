@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/od227/AndroidStudioProjects/Mzreport_Adm/app/src/main/res/drawable/buttomstyle.xml" value="0.1" />
         <entry key="..\:/Users/od227/AndroidStudioProjects/Mzreport_Adm/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.1" />
         <entry key="..\:/Users/od227/AndroidStudioProjects/Mzreport_Adm/app/src/main/res/layout/activity_detalle_reportes.xml" value="0.1644021739130435" />
         <entry key="..\:/Users/od227/AndroidStudioProjects/Mzreport_Adm/app/src/main/res/layout/activity_edit_profile.xml" value="0.1644021739130435" />
@@ -16,7 +17,10 @@
         <entry key="..\:/Users/od227/AndroidStudioProjects/Mzreport_Adm/app/src/main/res/layout/fragment_reports.xml" value="0.2" />
         <entry key="..\:/Users/od227/AndroidStudioProjects/Mzreport_Adm/app/src/main/res/layout/fragment_terminate.xml" value="0.1644021739130435" />
         <entry key="..\:/Users/od227/AndroidStudioProjects/Mzreport_Adm/app/src/main/res/layout/listviewresource.xml" value="0.1644021739130435" />
+        <entry key="..\:/Users/od227/AndroidStudioProjects/Mzreport_Adm/app/src/main/res/layout/stylebut.xml" value="0.21" />
+        <entry key="..\:/Users/od227/AndroidStudioProjects/Mzreport_Adm/app/src/main/res/layout/stylebutt.xml" value="0.1644021739130435" />
         <entry key="..\:/Users/od227/AndroidStudioProjects/Mzreport_Adm/app/src/main/res/layout/toolbar.xml" value="0.1644021739130435" />
+        <entry key="..\:/Users/od227/AndroidStudioProjects/Mzreport_Adm/app/src/main/res/layout/ver_users.xml" value="0.1644021739130435" />
         <entry key="..\:/Users/od227/AndroidStudioProjects/Mzreport_Adm/app/src/main/res/layout/view_report_single.xml" value="0.1644021739130435" />
         <entry key="..\:/Users/od227/AndroidStudioProjects/Mzreport_Adm/app/src/main/res/menu/bottom_navigation.xml" value="0.16324786324786325" />
         <entry key="..\:/Users/od227/AndroidStudioProjects/Mzreport_Adm/app/src/main/res/menu/botton_navigation.xml" value="0.14921875" />

@@ -148,7 +148,9 @@ public class Sing_up extends AppCompatActivity {
                                         Log.d(TAG, "onFailure: " + e.toString());
                                     }
                                 });
-                                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                                Toast.makeText(Sing_up.this, "Espera a que te asignen un departamento", Toast.LENGTH_SHORT).show();
+                                fAuth.signOut();
+                                startActivity(new Intent(getApplicationContext(),login.class));
                                 finish();
                             }else {
                                 Toast.makeText(Sing_up.this, "Error ! El Correo ya esta registrado" , Toast.LENGTH_SHORT).show();
@@ -169,7 +171,7 @@ public class Sing_up extends AppCompatActivity {
         super.onStart();
         FirebaseUser user = fAuth.getCurrentUser();
         if (user != null){
-            startActivity(new Intent(Sing_up.this, MainActivity.class));
+            startActivity(new Intent(Sing_up.this, login.class));
         }//sacar usuario
     }
 

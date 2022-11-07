@@ -18,6 +18,12 @@
         android:theme="@style/Theme.Mzreport_Adm"
         tools:targetApi="31">
         <activity
+            android:name=".ubicacion_reporte"
+            android:exported="false" />
+        <activity
+            android:name=".Detalle_Reportes"
+            android:exported="false" />
+        <activity
             android:name=".EditProfile"
             android:exported="false" />
 

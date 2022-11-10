@@ -62,6 +62,7 @@ public class ubicacion_reporte extends AppCompatActivity implements OnMapReadyCa
         setActionBar(mToolbar);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setTitleTextColor(Color.WHITE);
+
         getActionBar().setTitle("Ubicacion del reporte");
         mToolbar.setNavigationOnClickListener(view -> onBackPressed());
 
@@ -69,8 +70,6 @@ public class ubicacion_reporte extends AppCompatActivity implements OnMapReadyCa
 
 
     }
-
-
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {

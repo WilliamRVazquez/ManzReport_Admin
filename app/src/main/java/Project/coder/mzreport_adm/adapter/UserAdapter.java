@@ -48,33 +48,16 @@ public class UserAdapter extends FirestoreRecyclerAdapter<users, UserAdapter.Vie
         DocumentSnapshot documentSnapshot = getSnapshots().getSnapshot(viewHolder.getAdapterPosition());
         final String id = documentSnapshot.getId();
 
-        viewHolder.tiporeporte.setText(users.getTiporeporte());//
+        viewHolder.fName.setText(users.getfName());//
+        viewHolder.email.setText(users.getEmail());
+        viewHolder.phone.setText(users.getPhone());
         viewHolder.btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 deleteReport(id);
             }
         });
-        viewHolder.btn_detalles.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(activity, Detalle_Reportes.class);
-                i.putExtra("id_Reportes", id);
-                activity.startActivity(i);
-            }
-        });
-        viewHolder.btn_ubicacion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(activity, ubicacion_reporte.class);
-                i.putExtra("id_Ubicacion", id);
-                activity.startActivity(i);
-            }
-        });
     }
-
-
-
 
     private void deleteReport(String id) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this.activity);
@@ -83,7 +66,7 @@ public class UserAdapter extends FirestoreRecyclerAdapter<users, UserAdapter.Vie
                 .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        mFirestore.collection("Reportes").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        mFirestore.collection("users").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
 
@@ -103,30 +86,30 @@ public class UserAdapter extends FirestoreRecyclerAdapter<users, UserAdapter.Vie
                     }
                 });
         AlertDialog titulo = alert.create();
-        titulo.setTitle("Elimanar Reporte");
+        titulo.setTitle("Usuario Eliminado");
         titulo.show();
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.view_report_single, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.ver_users, parent, false);
 
         return new ViewHolder(v);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tiporeporte, ubicacion;
-        ImageView btn_delete,btn_detalles,btn_ubicacion;
+        TextView fName,email,phone;
+        ImageView btn_delete;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            tiporeporte = itemView.findViewById(R.id.tiporeporte);
+            fName = itemView.findViewById(R.id.Nombre_user);
+            email = itemView.findViewById(R.id.Correo_user);
+            phone = itemView.findViewById(R.id.telefono_user);
             btn_delete = itemView.findViewById(R.id.btn_eliminar);
-            btn_detalles = itemView.findViewById(R.id.btn_detail);
-            btn_ubicacion = itemView.findViewById(R.id.btn_location);
 
 
         }

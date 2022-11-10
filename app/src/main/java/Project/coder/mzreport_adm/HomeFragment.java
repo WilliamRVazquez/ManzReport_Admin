@@ -52,13 +52,12 @@ public class HomeFragment extends Fragment {
 
      return root;
     }
+
     @SuppressLint("NotifyDataSetChanged")
     private void setUpRecyclerView() {
         mFirestore = FirebaseFirestore.getInstance();
 
-        mRecycler.setLayoutManager(new ReportsFragment.WrapContentLinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL,false));
-
-
+        mRecycler.setLayoutManager(new WrapContentLinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL,false));
 
 
         query = mFirestore.collection("users");

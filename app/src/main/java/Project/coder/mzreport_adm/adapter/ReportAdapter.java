@@ -22,6 +22,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import Project.coder.mzreport_adm.Detalle_Reportes;
 import Project.coder.mzreport_adm.R;
 import Project.coder.mzreport_adm.model.Report;
@@ -65,6 +68,13 @@ public class ReportAdapter extends FirestoreRecyclerAdapter<Report, ReportAdapte
                 activity.startActivity(i);
             }
         });
+        viewHolder.btn_accept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                aceptReport(id);
+            }
+        });
+
         viewHolder.btn_ubicacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,7 +85,38 @@ public class ReportAdapter extends FirestoreRecyclerAdapter<Report, ReportAdapte
         });
     }
 
-
+    private void aceptReport(String id) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this.activity);
+        alert.setMessage("¿esta seguro de acpetar este reporte")
+                .setCancelable(false)
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Map<String, Object> map = new HashMap<>();
+                        map.put("Aceptado", "Si");
+                        mFirestore.collection("Reportes").document(id).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(activity, "El reporte fue aceptado", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(activity, "Error al aceptar el reporte", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog titulo = alert.create();
+        titulo.setTitle("Elimanar Reporte");
+        titulo.show();
+    }
 
 
     private void deleteReport(String id) {
@@ -119,7 +160,7 @@ public class ReportAdapter extends FirestoreRecyclerAdapter<Report, ReportAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView tiporeporte, ubicacion, date;
-        ImageView btn_delete,btn_detalles,btn_ubicacion;
+        ImageView btn_delete,btn_detalles,btn_ubicacion,btn_accept;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -128,6 +169,7 @@ public class ReportAdapter extends FirestoreRecyclerAdapter<Report, ReportAdapte
             tiporeporte = itemView.findViewById(R.id.tiporeporte);
             btn_delete = itemView.findViewById(R.id.btn_eliminar);
             btn_detalles = itemView.findViewById(R.id.btn_detail);
+            btn_accept = itemView.findViewById(R.id.btn_acept);
             btn_ubicacion = itemView.findViewById(R.id.btn_location);
             ubicacion = itemView.findViewById(R.id.ubicacion);
             date = itemView.findViewById(R.id.date);

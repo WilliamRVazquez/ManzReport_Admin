@@ -17,8 +17,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -114,7 +118,7 @@ public class ReportAdapter extends FirestoreRecyclerAdapter<Report, ReportAdapte
                     }
                 });
         AlertDialog titulo = alert.create();
-        titulo.setTitle("Elimanar Reporte");
+        titulo.setTitle("Aceptar reporte");
         titulo.show();
     }
 
@@ -129,6 +133,8 @@ public class ReportAdapter extends FirestoreRecyclerAdapter<Report, ReportAdapte
                         mFirestore.collection("Reportes").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
+
+
 
                             }
                         }).addOnFailureListener(new OnFailureListener() {

@@ -1,6 +1,8 @@
 package Project.coder.mzreport_adm.adapter;
 
 
+import static com.google.firebase.firestore.FieldValue.delete;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -17,8 +19,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -61,30 +68,31 @@ public class UserAdapter extends FirestoreRecyclerAdapter<users, UserAdapter.Vie
 
     private void deleteReport(String id) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this.activity);
-        alert.setMessage("Seguro que quieres eliminar este reporte?")
-                .setCancelable(false)
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+        alert.setMessage("Seguro que quieres eliminar este reporte?");
+        alert.setCancelable(false);
+        alert.setPositiveButton("Si", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mFirestore.collection("users").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        mFirestore.collection("users").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
+                    public void onSuccess(Void unused) {
 
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(activity, "Error al eliminar", Toast.LENGTH_SHORT).show();
-                            }
-                        });
                     }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                }).addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(activity, "Error al eliminar", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+        alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
         AlertDialog titulo = alert.create();
         titulo.setTitle("Usuario Eliminado");
         titulo.show();

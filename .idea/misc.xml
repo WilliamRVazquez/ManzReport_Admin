@@ -27,6 +27,7 @@
         <entry key="app/src/main/res/layout/activity_detalle_reportes.xml" value="0.303125" />
         <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.303125" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.303125" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.303125" />
         <entry key="app/src/main/res/layout/activity_ubicacion_reporte.xml" value="0.303125" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.303125" />
         <entry key="app/src/main/res/layout/fragment_perfil.xml" value="0.303125" />
@@ -34,6 +35,7 @@
         <entry key="app/src/main/res/layout/fragment_terminate.xml" value="0.303125" />
         <entry key="app/src/main/res/layout/listviewresource.xml" value="0.303125" />
         <entry key="app/src/main/res/layout/stylebutt.xml" value="0.303125" />
+        <entry key="app/src/main/res/layout/terminado_single.xml" value="0.30104166666666665" />
         <entry key="app/src/main/res/layout/toolbar.xml" value="0.303125" />
         <entry key="app/src/main/res/layout/ver_users.xml" value="0.303125" />
         <entry key="app/src/main/res/layout/view_report_single.xml" value="0.303125" />

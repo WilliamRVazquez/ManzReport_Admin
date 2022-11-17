@@ -50,14 +50,7 @@ public class login extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         mLoginBtn = findViewById(R.id.button_sesion);
         forgotTextLink = findViewById(R.id.Click_aqui_contraseña);
-        mCreateBtn = findViewById(R.id.txtv_register_and_btn);
 
-        mCreateBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),Sing_up.class));
-            }
-        });
 
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override

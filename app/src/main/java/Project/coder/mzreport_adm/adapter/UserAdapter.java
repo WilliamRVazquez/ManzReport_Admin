@@ -29,6 +29,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import Project.coder.mzreport_adm.Detalle_Reportes;
 import Project.coder.mzreport_adm.R;
 import Project.coder.mzreport_adm.model.Report;
@@ -68,15 +71,17 @@ public class UserAdapter extends FirestoreRecyclerAdapter<users, UserAdapter.Vie
 
     private void deleteReport(String id) {
         AlertDialog.Builder alert = new AlertDialog.Builder(this.activity);
-        alert.setMessage("Seguro que quieres eliminar este reporte?");
+        alert.setMessage("Seguro que quieres eliminar a este usuario?");
         alert.setCancelable(false);
         alert.setPositiveButton("Si", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                mFirestore.collection("users").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                Map<String, Object> map = new HashMap<>();
+                map.put("borrado", true);
+                mFirestore.collection("users").document(id).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
-
+                        Toast.makeText(activity, "Se notifico a el usuario que su cuenta se eliminara", Toast.LENGTH_SHORT).show();
                     }
 
                 }).addOnFailureListener(new OnFailureListener() {
@@ -94,7 +99,7 @@ public class UserAdapter extends FirestoreRecyclerAdapter<users, UserAdapter.Vie
             }
         });
         AlertDialog titulo = alert.create();
-        titulo.setTitle("Usuario Eliminado");
+        titulo.setTitle("Eliminar usuario");
         titulo.show();
     }
 

@@ -165,19 +165,7 @@
                 app:layout_constraintVertical_bias="0.0"
                 tools:ignore="MissingConstraints" />
 
-            <TextView
-                android:id="@+id/txtv_register_and_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="No tienes Cuenta? Registrate"
-                android:textColor="#2874E8"
-                android:textSize="15dp"
-                app:layout_constraintBottom_toTopOf="@+id/progressBar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.502"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints" />
+
 
             <ProgressBar
                 android:id="@+id/progressBar"

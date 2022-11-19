@@ -2,10 +2,12 @@ package Project.coder.mzreport_adm;
 
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -56,5 +58,28 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container,fragment);
         transaction.commit();
+    }
+
+
+    public void onBackPressed() {
+        AlertDialog.Builder exit = new AlertDialog.Builder(this);
+        exit.setMessage("Esta seguro de salir de la Aplicacion?")
+                .setCancelable(false)
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        moveTaskToBack(true); finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog titulo = exit.create();
+        titulo.setTitle("Salir de la app");
+        titulo.show();
+
     }
 }

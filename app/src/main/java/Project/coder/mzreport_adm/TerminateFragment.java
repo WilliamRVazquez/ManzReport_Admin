@@ -1,64 +1,99 @@
 package Project.coder.mzreport_adm;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link TerminateFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+
+import Project.coder.mzreport_adm.adapter.TerminadoAdapter;
+import Project.coder.mzreport_adm.model.terminado;
+
 public class TerminateFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public TerminateFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment TerminateFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static TerminateFragment newInstance(String param1, String param2) {
-        TerminateFragment fragment = new TerminateFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    public static final String TAG = "TAG";
+    RecyclerView mRecycler;
+    TerminadoAdapter mAdapter;
+    FirebaseFirestore mFirestore;
+    FirebaseAuth mAuth;
+    Query query;
+    String correo_e;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        mFirestore = FirebaseFirestore.getInstance();
+        View root = inflater.inflate(R.layout.fragment_terminate, container, false);
+        mAuth = FirebaseAuth.getInstance();
+
+        SharedPreferences prefs = getActivity().getSharedPreferences("Preferences", 0);
+        correo_e = prefs.getString("users", "");
+        mRecycler =root.findViewById(R.id.recyclerViewSingle);
+
+        query = mFirestore.collection("Reportes").whereEqualTo("Aceptado", "Terminado");
+        setUpRecyclerView();
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_terminate, container, false);
+        return root;
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    private void setUpRecyclerView() {
+
+        mRecycler.setLayoutManager(new WrapContentLinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL,false));
+
+        //query = mFirestore.collection("Reportes").whereEqualTo("Aceptado", "Terminado");
+
+        FirestoreRecyclerOptions<terminado> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<terminado>().setQuery(query, terminado.class).build();
+
+        mAdapter = new TerminadoAdapter(firestoreRecyclerOptions, this.getActivity());
+        mAdapter.notifyDataSetChanged();
+        mRecycler.setAdapter(mAdapter);
+    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAdapter.startListening();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        mAdapter.stopListening();
+    }
+    public static class WrapContentLinearLayoutManager extends LinearLayoutManager {
+        public WrapContentLinearLayoutManager(Context context) {
+            super(context);
+        }
+
+        public WrapContentLinearLayoutManager(Context context, int orientation, boolean reverseLayout) {
+            super(context, orientation, reverseLayout);
+        }
+
+        public WrapContentLinearLayoutManager(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+            super(context, attrs, defStyleAttr, defStyleRes);
+        }
+
+        @Override
+        public void onLayoutChildren(RecyclerView.Recycler recycler, RecyclerView.State state) {
+            try {
+                super.onLayoutChildren(recycler, state);
+            } catch (IndexOutOfBoundsException e) {
+                Log.e("TAG", "meet a IOOBE in RecyclerView");
+            }
+        }
     }
 }

@@ -1,6 +1,8 @@
 package Project.coder.mzreport_adm;
 
 
+import static android.content.ContentValues.TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,12 +10,24 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class MainActivity extends AppCompatActivity {
+    FirebaseFirestore mFirestore;
+    FirebaseAuth mAuth;
+    String rol;
 
     PerfilFragment perfilFragment = new PerfilFragment();
     HomeFragment homeFragment = new HomeFragment();
@@ -25,10 +39,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-                BottomNavigationView navegacion = findViewById(R.id.bottom_navigation);
+        mFirestore = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+
+
+        BottomNavigationView navegacion = findViewById(R.id.bottom_navigation);
         navegacion.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         loadFragment(homeFragment);
-
     }
 
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

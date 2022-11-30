@@ -73,7 +73,7 @@ public class ReportsFragment extends Fragment {
 
 
 
-        query = mFirestore.collection("Reportes").whereEqualTo("Aceptado", "En Espera");
+        query = mFirestore.collection("Reportes").whereEqualTo("Aceptado", "En espera");
 
 
         FirestoreRecyclerOptions<Report> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder<Report>().setQuery(query, Report.class).build();

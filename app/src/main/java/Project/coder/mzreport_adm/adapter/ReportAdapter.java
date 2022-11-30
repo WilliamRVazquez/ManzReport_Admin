@@ -97,7 +97,7 @@ public class ReportAdapter extends FirestoreRecyclerAdapter<Report, ReportAdapte
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Map<String, Object> map = new HashMap<>();
-                        map.put("Aceptado", "Si");
+                        map.put("Aceptado", "Aceptado");
                         mFirestore.collection("Reportes").document(id).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void unused) {
